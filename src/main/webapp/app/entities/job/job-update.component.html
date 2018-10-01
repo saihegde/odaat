@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-job-heading" jhiTranslate="odaatApp.job.home.createOrEditLabel">Create or edit a Job</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!job.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="job.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.job.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="job.title" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.job.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="job.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.job.jobDate" for="field_jobDate">Job Date</label>
+                    <div class="d-flex">
+                        <input id="field_jobDate" type="datetime-local" class="form-control" name="jobDate" [(ngModel)]="jobDate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.job.pay" for="field_pay">Pay</label>
+                    <input type="number" class="form-control" name="pay" id="field_pay"
+                        [(ngModel)]="job.pay" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.job.location" for="field_location">Location</label>
+                    <select class="form-control" id="field_location" name="location" [(ngModel)]="job.location">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="jobLocationOption.id === job.location?.id ? job.location : jobLocationOption" *ngFor="let jobLocationOption of locations; trackBy: trackJobLocationById">{{jobLocationOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.job.owner" for="field_owner">Owner</label>
+                    <select class="form-control" id="field_owner" name="owner" [(ngModel)]="job.owner" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === job.owner?.id ? job.owner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.email}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="jobLocation">
+            <h2><span jhiTranslate="odaatApp.jobLocation.detail.title">Job Location</span> {{jobLocation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="odaatApp.jobLocation.addressLine1">Address Line 1</span></dt>
+                <dd>
+                    <span>{{jobLocation.addressLine1}}</span>
+                </dd>
+                <dt><span jhiTranslate="odaatApp.jobLocation.addressLine2">Address Line 2</span></dt>
+                <dd>
+                    <span>{{jobLocation.addressLine2}}</span>
+                </dd>
+                <dt><span jhiTranslate="odaatApp.jobLocation.city">City</span></dt>
+                <dd>
+                    <span>{{jobLocation.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="odaatApp.jobLocation.zipcode">Zipcode</span></dt>
+                <dd>
+                    <span>{{jobLocation.zipcode}}</span>
+                </dd>
+                <dt><span jhiTranslate="odaatApp.jobLocation.state">State</span></dt>
+                <dd>
+                    <div *ngIf="jobLocation.state">
+                        <a [routerLink]="['/location-state', jobLocation.state?.id, 'view']">{{jobLocation.state?.name}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="odaatApp.jobLocation.country">Country</span></dt>
+                <dd>
+                    <div *ngIf="jobLocation.country">
+                        <a [routerLink]="['/country', jobLocation.country?.id, 'view']">{{jobLocation.country?.name}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job-location', jobLocation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

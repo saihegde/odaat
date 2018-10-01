@@ -1,0 +1,24 @@
+
+{
+    "odaatApp": {
+        "locationState" : {
+            "home": {
+                "title": "Location States",
+                "createLabel": "Crear nuevo Location State",
+                "createOrEditLabel": "Crear o editar Location State",
+                "search": "Search for Location State"
+            },
+            "created": "Un nuevo Location State ha sido creado con el identificador {{ param }}",
+            "updated": "Un Location State ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Location State ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Location State {{ id }}?"
+            },
+            "detail": {
+                "title": "Location State"
+            },
+            "name": "Name",
+            "country": "Country"
+        }
+    }
+}

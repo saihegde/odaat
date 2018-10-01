@@ -1,0 +1,27 @@
+{
+    "name": "JobBid",
+    "fields": [
+        {
+            "fieldName": "status",
+            "fieldType": "JobStatus",
+            "fieldValues": "OPEN,IN_PROGRESS,COMPLETED,PURGED"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "job",
+            "otherEntityName": "job",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181001041357",
+    "entityTableName": "job_bid",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

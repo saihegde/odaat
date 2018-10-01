@@ -1,0 +1,28 @@
+
+{
+    "odaatApp": {
+        "jobLocation" : {
+            "home": {
+                "title": "Job Locations",
+                "createLabel": "Create a new Job Location",
+                "createOrEditLabel": "Create or edit a Job Location",
+                "search": "Search for Job Location"
+            },
+            "created": "A new Job Location is created with identifier {{ param }}",
+            "updated": "A Job Location is updated with identifier {{ param }}",
+            "deleted": "A Job Location is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Job Location {{ id }}?"
+            },
+            "detail": {
+                "title": "Job Location"
+            },
+            "addressLine1": "Address Line 1",
+            "addressLine2": "Address Line 2",
+            "city": "City",
+            "zipcode": "Zipcode",
+            "state": "State",
+            "country": "Country"
+        }
+    }
+}

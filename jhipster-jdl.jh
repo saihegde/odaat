@@ -1,0 +1,53 @@
+
+
+entity Country {
+	name String,
+}
+
+entity LocationState {
+	name String,
+}
+
+entity UserProfile{
+	receiveEmailAlerts Boolean,
+    receiveTextAlerts Boolean,
+    notifyOfJobsInArea Boolean
+}
+
+entity Job {
+	title String,
+    description String,
+    jobDate Instant,
+    pay BigDecimal,
+}
+
+entity JobLocation {
+	addressLine1 String,
+    addressLine2 String,
+    city String,
+    zipcode String
+}
+
+enum JobStatus {
+	OPEN,
+    IN_PROGRESS,
+    COMPLETED,
+    PURGED
+}
+
+entity JobBid {
+	status JobStatus 
+}
+
+relationship OneToOne {
+	Job{location} to JobLocation,
+    UserProfile{user} to User
+}
+
+relationship ManyToOne {
+	LocationState{country(name)} to Country,
+    JobLocation{state(name)} to LocationState,
+    JobLocation{country(name)} to Country,
+    Job{owner(email)} to User,
+    JobBid to Job
+}

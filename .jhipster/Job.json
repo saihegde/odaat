@@ -1,0 +1,52 @@
+{
+    "name": "Job",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "jobDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "pay",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "location",
+            "otherEntityName": "jobLocation",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "job"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "owner",
+            "otherEntityName": "user",
+            "otherEntityField": "email"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "jobBid",
+            "otherEntityName": "jobBid",
+            "otherEntityRelationshipName": "job"
+        }
+    ],
+    "changelogDate": "20181001041355",
+    "entityTableName": "job",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

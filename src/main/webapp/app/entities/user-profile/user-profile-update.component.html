@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-user-profile-heading" jhiTranslate="odaatApp.userProfile.home.createOrEditLabel">Create or edit a User Profile</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!userProfile.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="userProfile.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.userProfile.receiveEmailAlerts" for="field_receiveEmailAlerts">Receive Email Alerts</label>
+                    <input type="checkbox" class="form-control" name="receiveEmailAlerts" id="field_receiveEmailAlerts"
+                        [(ngModel)]="userProfile.receiveEmailAlerts" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.userProfile.receiveTextAlerts" for="field_receiveTextAlerts">Receive Text Alerts</label>
+                    <input type="checkbox" class="form-control" name="receiveTextAlerts" id="field_receiveTextAlerts"
+                        [(ngModel)]="userProfile.receiveTextAlerts" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.userProfile.notifyOfJobsInArea" for="field_notifyOfJobsInArea">Notify Of Jobs In Area</label>
+                    <input type="checkbox" class="form-control" name="notifyOfJobsInArea" id="field_notifyOfJobsInArea"
+                        [(ngModel)]="userProfile.notifyOfJobsInArea" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="odaatApp.userProfile.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="userProfile.user" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === userProfile.user?.id ? userProfile.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
