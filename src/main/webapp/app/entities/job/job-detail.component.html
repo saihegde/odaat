@@ -27,9 +27,9 @@
                         <a [routerLink]="['/job-location', job.location?.id, 'view']">{{job.location?.id}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="odaatApp.job.owner">Owner</span></dt>
-                <dd>
-                    {{job.owner?.email}}
+                <dt *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="odaatApp.job.owner">Posted By:</span></dt>
+                <dd *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    {{job.owner?.firstName}} {{job.owner?.lastName}}
                 </dd>
             </dl>
 

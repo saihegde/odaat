@@ -3,7 +3,11 @@ package com.anchormind.odaat.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.anchormind.odaat.domain.Job;
 import com.anchormind.odaat.repository.JobRepository;
+import com.anchormind.odaat.repository.UserRepository;
 import com.anchormind.odaat.repository.search.JobSearchRepository;
+import com.anchormind.odaat.security.AuthoritiesConstants;
+import com.anchormind.odaat.security.SecurityUtils;
+import com.anchormind.odaat.service.UserService;
 import com.anchormind.odaat.web.rest.errors.BadRequestAlertException;
 import com.anchormind.odaat.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -36,10 +40,13 @@ public class JobResource {
     private final JobRepository jobRepository;
 
     private final JobSearchRepository jobSearchRepository;
+    
+    private final UserRepository userRepository;
 
-    public JobResource(JobRepository jobRepository, JobSearchRepository jobSearchRepository) {
+    public JobResource(JobRepository jobRepository, JobSearchRepository jobSearchRepository, UserRepository userRepository) {
         this.jobRepository = jobRepository;
         this.jobSearchRepository = jobSearchRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +62,9 @@ public class JobResource {
         log.debug("REST request to save Job : {}", job);
         if (job.getId() != null) {
             throw new BadRequestAlertException("A new job cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if(!SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+        	job.setOwner(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get());
         }
         Job result = jobRepository.save(job);
         jobSearchRepository.save(result);
@@ -79,6 +89,9 @@ public class JobResource {
         if (job.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        if(!SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+        	job.setOwner(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get());
+        }
         Job result = jobRepository.save(job);
         jobSearchRepository.save(result);
         return ResponseEntity.ok()
@@ -95,6 +108,9 @@ public class JobResource {
     @Timed
     public List<Job> getAllJobs() {
         log.debug("REST request to get all Jobs");
+        if(!SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+        	return jobRepository.findByOwnerIsCurrentUser();
+        }
         return jobRepository.findAll();
     }
 

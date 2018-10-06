@@ -35,7 +35,7 @@
             <th><span jhiTranslate="odaatApp.job.jobDate">Job Date</span></th>
             <th><span jhiTranslate="odaatApp.job.pay">Pay</span></th>
             <th><span jhiTranslate="odaatApp.job.location">Location</span></th>
-            <th><span jhiTranslate="odaatApp.job.owner">Owner</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="odaatApp.job.owner">Owner</span></th>
             <th></th>
             </tr>
             </thead>
@@ -46,13 +46,14 @@
                 <td>{{job.description}}</td>
                 <td>{{job.jobDate | date:'medium'}}</td>
                 <td>{{job.pay}}</td>
-                <td>
+                <td>{{job.location?.addressLine1}}</td>
+                <!-- <td>
                     <div *ngIf="job.location">
                         <a [routerLink]="['../job-location', job.location?.id, 'view' ]" >{{job.location?.id}}</a>
                     </div>
-                </td>
-                <td>
-                    {{job.owner?.email}}
+                </td> -->
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    {{job.owner?.firstName}} {{job.owner?.lastName}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

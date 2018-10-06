@@ -33,7 +33,7 @@
             <th><span jhiTranslate="odaatApp.userProfile.receiveEmailAlerts">Receive Email Alerts</span></th>
             <th><span jhiTranslate="odaatApp.userProfile.receiveTextAlerts">Receive Text Alerts</span></th>
             <th><span jhiTranslate="odaatApp.userProfile.notifyOfJobsInArea">Notify Of Jobs In Area</span></th>
-            <th><span jhiTranslate="odaatApp.userProfile.user">User</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="odaatApp.userProfile.user">User</span></th>
             <th></th>
             </tr>
             </thead>
@@ -43,7 +43,7 @@
                 <td>{{userProfile.receiveEmailAlerts}}</td>
                 <td>{{userProfile.receiveTextAlerts}}</td>
                 <td>{{userProfile.notifyOfJobsInArea}}</td>
-                <td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     {{userProfile.user?.id}}
                 </td>
                 <td class="text-right">

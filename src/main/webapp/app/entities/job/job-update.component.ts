@@ -11,6 +11,10 @@ import { JobService } from './job.service';
 import { IJobLocation } from 'app/shared/model/job-location.model';
 import { JobLocationService } from 'app/entities/job-location';
 import { IUser, UserService } from 'app/core';
+import { ILocationState } from 'app/shared/model/location-state.model';
+import { LocationStateService } from 'app/entities/location-state';
+import { ICountry } from 'app/shared/model/country.model';
+import { CountryService } from 'app/entities/country';
 
 @Component({
     selector: 'jhi-job-update',
@@ -25,11 +29,16 @@ export class JobUpdateComponent implements OnInit {
     users: IUser[];
     jobDate: string;
 
+    locationstates: ILocationState[];
+    countries: ICountry[];
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private jobService: JobService,
         private jobLocationService: JobLocationService,
         private userService: UserService,
+        private locationStateService: LocationStateService,
+        private countryService: CountryService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -56,6 +65,18 @@ export class JobUpdateComponent implements OnInit {
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.locationStateService.query().subscribe(
+            (res: HttpResponse<ILocationState[]>) => {
+                this.locationstates = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.countryService.query().subscribe(
+            (res: HttpResponse<ICountry[]>) => {
+                this.countries = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
