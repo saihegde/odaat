@@ -8,9 +8,12 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IJob } from 'app/shared/model/job.model';
 import { JobService } from './job.service';
-import { IJobLocation } from 'app/shared/model/job-location.model';
-import { JobLocationService } from 'app/entities/job-location';
 import { IUser, UserService } from 'app/core';
+import { JobLocationUpdateComponent } from 'app/entities/job-location';
+import { JobLocationService } from 'app/entities/job-location';
+
+import { IJobLocation } from 'app/shared/model/job-location.model';
+
 import { ILocationState } from 'app/shared/model/location-state.model';
 import { LocationStateService } from 'app/entities/location-state';
 import { ICountry } from 'app/shared/model/country.model';
@@ -87,6 +90,7 @@ export class JobUpdateComponent implements OnInit {
     }
 
     save() {
+      console.log(this.job);
         this.isSaving = true;
         this.job.jobDate = moment(this.jobDate, DATE_TIME_FORMAT);
         if (this.job.id !== undefined) {
